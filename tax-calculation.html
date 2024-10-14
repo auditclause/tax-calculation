@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <script>
+
+        let incAmount;
+        let taxAmount;
+
+        function calcInc() {
+
+            document.getElementById("ty-p").innerHTML = "Tax year: 2024";
+            document.getElementById("fs-p").innerHTML = "Filing status: Single";
+
+            incAmount = Math.floor(Math.random()*500000)+609351;
+            const formatIncAmount = incAmount.toLocaleString();
+            document.getElementById("inc-p").innerHTML = "Income: " + formatIncAmount;
+
+            document.getElementById("bkt-p").innerHTML = "Tax bracket: 37%"
+            
+            taxAmount = 183647.25+(0.37 * (incAmount - 609350));
+            const formatTaxAmount = taxAmount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById("tax-p").innerHTML = "Tax amount: " + formatTaxAmount;
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <p>TAXPAYER INFORMATION</p>
+    <p id="ty-p">Tax year: </p>
+    <p id="fs-p">Filing status: </p>
+    <p id="inc-p">Income: </p>
+    <p id="bkt-p">Tax bracket: </p>
+    <p id="tax-p">Tax amount: </p>
+    <button onclick="calcInc()">Calculate Income Tax</button>
+
+</body>
