@@ -12,7 +12,8 @@
 
     ordIncAmount = Math.random() * 390649 + 609351;
     ordIncTaxAmount = 183647.25 + (ordIncAmount - 609351) * 0.37;
-    capGainsAmount = (Math.random() * 20000 + 80000) * 0.2;
+    capGainsAmount = (Math.random() * 20000 + 80000);
+    capGainsTaxAmount = capGainsAmount * 0.20;
 
     document.getElementById("ty-para").innerHTML = "Tax Year: 2024";
     document.getElementById("tp-para").innerHTML = "Taxpayer: John Doe";
@@ -21,9 +22,10 @@
     document.getElementById("cg-para").innerHTML = "Capital Gains: " + roundFormatter.format(capGainsAmount);
     document.getElementById("tb-para").innerHTML = "Tax Bracket: 37%";
     document.getElementById("oit-para").innerHTML = "Ordinary Income Tax: " + roundFormatter.format(ordIncTaxAmount);
-    document.getElementById("cgt-para").innerHTML = "Capital Gains Tax: " + roundFormatter.format(capGainsAmount);
-    document.getElementById("total-para").innerHTML = "Total Tax: " + roundFormatter.format(ordIncTaxAmount + capGainsAmount);
+    document.getElementById("cgt-para").innerHTML = "Capital Gains Tax: " + roundFormatter.format(capGainsTaxAmount);
+    document.getElementById("total-para").innerHTML = "Total Tax: " + roundFormatter.format(ordIncTaxAmount + capGainsTaxAmount);
   }
+
 </script>
 <body>
   <button onclick="calcTaxFn()">Calculate tax</button>
