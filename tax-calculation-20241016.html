@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <script>
+    function calcTaxFn() {
+      ordInc      = Math.round((Math.random() * 390649) + 609351);
+      ordIncTax   = Math.round(183647.25 + (0.37 * (ordInc - 609351)));
+      capGains    = Math.round(Math.random() * 30000 + 70000);
+      capGainsTax = Math.round(capGains * 0.20);
+      totalTax    = ordIncTax + capGainsTax;
+
+      formatter       = new Intl.NumberFormat("en-US", {
+          maximumFractionDigits: 0, 
+          minimumFractionDigits: 0,
+      });
+
+      document.getElementById("para-taxpayer"  ).innerHTML = "Taxpayer: John Doe";
+      document.getElementById("para-tax-year"  ).innerHTML = "Tax Year: 2024";
+      document.getElementById("para-filing"    ).innerHTML = "Filing Status: Single";
+      document.getElementById("para-ord-inc"   ).innerHTML = "Ordinary Income: "  + formatter.format(ordInc);
+      document.getElementById("para-oi-bracket").innerHTML = "OI Tax Bracket: 37%";
+      document.getElementById("para-oi-tax"    ).innerHTML = "OI Tax Amount: "    + formatter.format(ordIncTax);
+      document.getElementById("para-cg"        ).innerHTML = "Capital Gains: "    + formatter.format(capGains);
+      document.getElementById("para-cg-bracket").innerHTML = "CG Tax Bracket: 20%";
+      document.getElementById("para-cg-tax"    ).innerHTML = "CG Tax Amount: "    + formatter.format(capGainsTax);
+      document.getElementById("para-total"     ).innerHTML = "Total Tax Amount: " + formatter.format(totalTax);
+      document.getElementById("para-total"     ).className = "bold";
+    }
+  </script>
+  <style>
+    p.bold {font-weight: bold;}
+  </style>
+</head>
+<body>
+  <div>
+    <button onclick="calcTaxFn()">Calculate Tax</button>
+    <p id="para-taxpayer"  >Taxpayer:</p>
+    <p id="para-tax-year"  >Tax Year:</p>
+    <p id="para-filing"    >Filing Status:</p>
+    <p id="para-ord-inc"   >Ordinary Income:</p>
+    <p id="para-oi-bracket">OI Tax Bracket:</p>
+    <p id="para-oi-tax"    >OI Tax Amount:</p>
+    <p id="para-cg"        >Capital Gains:</p>
+    <p id="para-cg-bracket">CG Tax Bracket:</p>
+    <p id="para-cg-tax"    >CG Tax Amount:</p>
+    <p id="para-total"     >Total Tax Amount:</p>
+  </div>
+</body>
