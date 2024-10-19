@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    p.bold-overline {
+      font-weight: bolder;
+      text-decoration: overline;
+    };
+  </style>
+  <script>
+
+    function calcFn() {
+      
+      ordInc        = Math.round((Math.random() * 490651) + 609350);
+      stdDed        = 14600;
+      taxableInc    = ordInc - stdDed;
+      ordIncRate    = 0.37;
+      ordIncMin     = 183648;
+      ordIncFloor   = 609350;
+      ordIncBrkt    = Math.round((taxableInc - ordIncFloor) * ordIncRate);
+      ordIncTax     = Math.round(ordIncMin + ordIncBrkt);
+      ltcg          = Math.round((Math.random() * 260000) + 50000);
+      ltcgRate      = 0.20;
+      ltcgTax       = Math.round(ltcg * ltcgRate);
+      totalTax      = ordIncTax + ltcgTax;
+
+      function usdFormat(num) {
+        return new Intl.NumberFormat("en-US",{
+          style: 'currency', 
+          currency: 'USD',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(num);
+      }
+
+      function percentFormat(num) {
+        return new Intl.NumberFormat("en-US",{
+          style: 'percent',
+        }).format(num);
+      }
+
+      document.getElementById("p-ord-inc"       ).innerHTML = usdFormat    (ordInc)     + " Ordinary income";
+      document.getElementById("p-std-ded"       ).innerHTML = usdFormat    (stdDed)     + " Standard deduction";
+      document.getElementById("p-tax-inc"       ).innerHTML = usdFormat    (taxableInc) + " Taxable income";
+      document.getElementById("p-ord-inc-rate"  ).innerHTML = percentFormat(ordIncRate) + " Tax rate";
+      document.getElementById("p-ord-inc-min"   ).innerHTML = usdFormat    (ordIncMin)  + " Tax minimum";
+      document.getElementById("p-ord-inc-brkt"  ).innerHTML = usdFormat    (ordIncBrkt) + " Tax within bracket";
+      document.getElementById("p-ord-inc-tax"   ).className = "bold-overline";
+      document.getElementById("p-ord-inc-tax"   ).innerHTML = usdFormat    (ordIncTax)  + " Ordinary income tax";
+
+      document.getElementById("p-ltcg"          ).innerHTML = usdFormat    (ltcg)       + " LTCG";
+      document.getElementById("p-ltcg-rate"     ).innerHTML = percentFormat(ltcgRate)   + " Tax rate";
+      document.getElementById("p-ltcg-tax"      ).className = "bold-overline";
+      document.getElementById("p-ltcg-tax"      ).innerHTML = usdFormat    (ltcgTax)    + " LTCG tax";
+
+      document.getElementById("p-total-tax"     ).className = "bold-overline";
+      document.getElementById("p-total-tax"     ).innerHTML = usdFormat    (totalTax)   + " total tax";
+    }
+
+  </script>
+</head>
+<body>
+  <p id=  "p-ord-inc-tax-text"  >Ordinary Income Tax           </p>
+  <p id=  "p-ord-inc"           >$                             </p>
+  <p id=  "p-std-ded"           >$                             </p>
+  <p id=  "p-tax-inc"           >$                             </p>
+  <p id=  "p-ord-inc-rate"      >%                             </p>
+  <p id=  "p-ord-inc-min"       >$                             </p>
+  <p id=  "p-ord-inc-brkt"      >$                             </p>
+  <p id=  "p-ord-inc-tax"       >$                             </p>
+  <br>
+  <p id=  "p-ltcg-tax-text"     >Long-Term Capital Gains Tax:  </p>
+  <p id=  "p-ltcg"              >$                             </p>
+  <p id=  "p-ltcg-rate"         >%                             </p>
+  <p id=  "p-ltcg-tax"          >$                             </p>
+  <br>
+  <p id=  "p-total-tax-text"    >Total Tax:                    </p>
+  <p id=  "p-total-tax"         >$                             </p>
+  <button onclick="calcFn()">Calculate tax</button>
+</body>
