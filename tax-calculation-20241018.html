@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <script>
+    function calcTax() {
+      oi       = Math.round((Math.random() * 390649) + 609350);
+      oiRate   = 0.37;
+      oiTax    = Math.round(183647.25 + (oiRate * (oi - 609350)));
+      cg       = Math.round((Math.random() * 20000) + 60000);
+      cgRate   = 0.20;
+      cgTax    = Math.round(cg * cgRate);
+      totalTax = oiTax + cgTax;
+
+      function addComma(num) { 
+        return new Intl.NumberFormat("en-US", {}).format(num); 
+      }
+      function addPercent(num) { 
+        return new Intl.NumberFormat("en-US", {style: 'percent'}).format(num);
+      }
+
+      document.getElementById("para-ty"     ).innerHTML = "Tax Year: 2024";
+      document.getElementById("para-oi"     ).innerHTML = "Ordinary Income: " + addComma  (oi);
+      document.getElementById("para-oi-rate").innerHTML = "OI Tax Rate: "     + addPercent(oiRate);
+      document.getElementById("para-oi-tax" ).innerHTML = "OI Tax: "          + addComma  (oiTax);
+      document.getElementById("para-cg"     ).innerHTML = "Capital Gains: "   + addComma  (cg);
+      document.getElementById("para-cg-rate").innerHTML = "CG Tax Rate: "     + addPercent(cgRate);
+      document.getElementById("para-cg-tax" ).innerHTML = "CG Tax: "          + addComma  (cgTax);
+      document.getElementById("para-total"  ).innerHTML = "Total Tax: "       + addComma  (totalTax);
+      document.getElementById("para-total"  ).className = "blue";
+    }
+  </script>
+  <style>
+    p.blue {
+      color: blue;
+    };
+  </style>
+</head>
+<body>
+  <p id="para-ty"     >Tax Year:        </p>
+  <p id="para-oi"     >Ordinary Income: </p>
+  <p id="para-oi-rate">OI Tax Rate:     </p>
+  <p id="para-oi-tax" >OI Tax:          </p>
+  <p id="para-cg"     >Capital Gains:   </p>
+  <p id="para-cg-rate">CG Tax Rate:     </p>
+  <p id="para-cg-tax" >CG Tax:          </p>
+  <p id="para-total"  >Total Tax:       </p>
+  <button onclick="calcTax()">Calculate Tax</button>
+</body>
