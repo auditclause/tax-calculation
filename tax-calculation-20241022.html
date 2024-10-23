@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .grid-container {
+      display: grid;
+      padding: 10px;
+      grid-template-columns: 70px 200px;
+      grid-auto-rows: minmax(35px, 35px);
+      column-gap: 20px;
+    }
+    .grid-container > div {
+      font-size: medium;
+    }
+    .item1 {
+      grid-column: 1 / span 2;
+      font-weight: bolder;
+    }
+    .item2, .item4, .item6, .item8, .item10, .item12, .item14 {
+      text-align: right;
+    }
+  </style>
+  <script>
+
+    function calcFn() {
+
+      function getBracket(num) {
+        return (num > 609350 && num < 999999999) 
+                ? (
+                  ordIncRate     = 0.37,
+                  ordIncLwrBrkts = 183647.25,
+                  ordIncCeiling  = 1000000000,
+                  ordIncFloor    = 609351
+                  )
+             : (num > 243725 && num < 609350) 
+                ? (
+                  ordIncRate     = 0.35,
+                  ordIncLwrBrkts = 55678.50,
+                  ordIncCeiling  = 609350,
+                  ordIncFloor    = 243726
+                  )
+             : (num > 191951 && num < 243725) 
+                ? (
+                  ordIncRate     = 0.32,
+                  ordIncLwrBrkts = 39110.50,
+                  ordIncCeiling  = 243725,
+                  ordIncFloor    = 191951
+                  )
+             : console.log("Lower than 32% bracket.")
+        };
+
+      function getLtcgBracket(num) {
+        return (num > 518900 && num < 999999999) 
+                ? ltcgRate = 0.20
+             : (num > 47025 && num < 518900) 
+                ? ltcgRate = 0.15
+             : (num > 0 && num < 47025) 
+                ? ltcgRate = 0.00
+             : console.log("Error.")
+        };
+
+      ordInc           = Math.round((Math.random() * 900000) + 30000);
+      stdDed           = 14600;
+      taxableInc       = ordInc - stdDed;
+      getBracket(taxableInc);
+      getLtcgBracket(taxableInc);
+
+      ordIncBrkt       = Math.round((taxableInc - ordIncFloor) * ordIncRate);
+      ordIncTax        = Math.round(ordIncLwrBrkts + ordIncBrkt);
+      
+      ltcg             = Math.round((Math.random() * 260000) + 20000);
+      ltcgTax          = Math.round(ltcg * ltcgRate);
+      totalTax         = ordIncTax + ltcgTax;
+
+      function usdFormat(num) {
+        return new Intl.NumberFormat("en-US",{
+          style: 'currency', 
+          currency: 'USD',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(num);
+      }
+
+      function percentFormat(num) {
+        return new Intl.NumberFormat("en-US",{
+          style: 'percent',
+        }).format(num);
+      }
+
+      document.getElementById("id-ord-inc"     ).innerHTML = usdFormat    (ordInc         );
+      document.getElementById("id-std-ded"     ).innerHTML = usdFormat    (stdDed         );
+      document.getElementById("id-tax-inc"     ).innerHTML = usdFormat    (taxableInc     );
+      document.getElementById("id-ord-inc-rate").innerHTML = percentFormat(ordIncRate     );
+      document.getElementById("id-ord-inc-min" ).innerHTML = usdFormat    (ordIncLwrBrkts );
+      document.getElementById("id-ord-inc-brkt").innerHTML = usdFormat    (ordIncBrkt     );
+      document.getElementById("id-ord-inc-tax" ).innerHTML = usdFormat    (ordIncTax      );
+
+      document.getElementById("id-ltcg"        ).innerHTML = usdFormat    (ltcg           );
+      document.getElementById("id-ltcg-rate"   ).innerHTML = percentFormat(ltcgRate       );
+      document.getElementById("id-ltcg-tax"    ).innerHTML = usdFormat    (ltcgTax        );
+
+      document.getElementById("id-total-tax"   ).innerHTML = usdFormat    (totalTax       );
+    }
+
+  </script>
+</head>
+<body>
+
+  <div class="grid-container">
+    <div class="item1"  id="id-ord-inc-title" >Ordinary Income Tax        </div>
+    <div class="item2"  id="id-ord-inc"       >-                          </div>
+    <div class="item3"                        >Ordinary income            </div>
+    <div class="item4"  id="id-std-ded"       >-                          </div>
+    <div class="item5"                        >Standard deduction         </div>
+    <div class="item6"  id="id-tax-inc"       >-                          </div>
+    <div class="item7"                        >Taxable income             </div>
+    <div class="item8"  id="id-ord-inc-rate"  >%                          </div>
+    <div class="item9"                        >Tax rate                   </div>
+    <div class="item10" id="id-ord-inc-min"   >-                          </div>
+    <div class="item11"                       >Tax minimum                </div>
+    <div class="item12" id="id-ord-inc-brkt"  >-                          </div>
+    <div class="item13"                       >Tax within bracket         </div>
+    <div class="item14" id="id-ord-inc-tax"   >-                          </div>
+    <div class="item15"                       >Ordinary income tax        </div>
+  </div>
+
+  <div class="grid-container">
+    <div class="item1"  id="id-ltcg-title"    >Long-Term Capital Gains Tax</div>
+    <div class="item2"  id="id-ltcg"          >-                          </div>
+    <div class="item3"                        >LTCG                       </div>
+    <div class="item4"  id="id-ltcg-rate"     >%                          </div>
+    <div class="item5"                        >Tax rate                   </div>
+    <div class="item6"  id="id-ltcg-tax"      >-                          </div>
+    <div class="item7"                        >LTCG tax                   </div>
+  </div>
+
+  <div class="grid-container">
+    <div class="item1" id="id-total-title"    >Total Tax                  </div>
+    <div class="item2" id="id-total-tax"      >-                          </div>
+    <div class="item3"                        >Total income tax           </div>
+  </div>
+
+  <button onclick="calcFn()">Calculate tax</button>
+
+</body>
