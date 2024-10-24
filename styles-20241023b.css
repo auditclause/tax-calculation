@@ -1,0 +1,28 @@
+.grid-container {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: 70px 200px;
+  grid-auto-rows: minmax(35px, 35px);
+  column-gap: 20px;
+}
+.grid-container > div {
+  font-size: medium;
+}
+.item1 {
+  grid-column: 1 / span 2;
+  font-weight: bolder;
+}
+.item2,
+.item4,
+.item6,
+.item8,
+.item10,
+.item12,
+.item14 {
+  text-align: right;
+}
+.button {
+  position: relative;
+  left: 20px;
+  padding: 5px;
+}
