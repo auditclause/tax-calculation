@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 350;
+}
+
+.grid-breakdown-and-summary-wrapper {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 230px 130px;
+  column-gap: 30px;
+}
+
+.grid-summary-wrapper {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button {
+  height: 40px;
+  width: auto;
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(90, 170, 220);
+  font-size: 15px;
+  border-width: 1px;
+  border-color: rgb(90, 170, 220);
+  border-style: solid;
+}
+
+.button:hover {
+  height: 40px;
+  width: auto;
+  padding: 5px;
+  background-color: rgb(90, 170, 220);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  border-width: 1px;
+  border-color: rgb(90, 170, 220);
+  border-style: solid;
+}
+
+.summary {
+  text-align: center;
+  color: rgb(90, 170, 220);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.grid-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 70px 150px;
+  grid-auto-rows: minmax(32px, 32px);
+  column-gap: 20px;
+}
+
+.grid-container > div {
+  padding: 0px;
+}
+
+.item1 {
+  grid-column: 1 / span 2;
+  font-weight: bolder;
+}
+
+.item2,
+.item4,
+.item6,
+.item8,
+.item10,
+.item12,
+.item14 {
+  text-align: right;
+}
