@@ -4,66 +4,68 @@
   <script src="script.js"></script>
 </head>
 <body>
-<div class="container">
-  <div class="grid-breakdown-and-summary-wrapper">
-    <div class="grid-container-wrapper">
-      <div class="grid-container">
-        <div class="item1">Taxpayer Info</div>
-        <div class="item2">2024</div>
-        <div class="item3">Tax year</div>
-        <div class="item4">Single</div>
-        <div class="item5">Filing status</div>
-        <div class="item6">0</div>
-        <div class="item7">Dependents</div>
-        <div class="item8">No</div>
-        <div class="item9">Itemized</div>
+  <main>[Populate with data fetched]</main>
+  <div class="container">
+    <div class="grid-breakdown-and-summary-wrapper">
+      <div class="grid-container-wrapper">
+        <div class="grid-container">
+          <div class="item1" id="id-tp-info">Taxpayer Info</div>
+          <div class="item2">Occupation</div>
+          <div class="item3" id="id-occ">-</div>
+          <div class="item4">Tax year</div>
+          <div class="item5">2024</div>
+          <div class="item6">Filing status</div>
+          <div class="item7">Single</div>
+          <div class="item8">Itemized</div>
+          <div class="item9">No</div>
+        </div>
+        <div class="grid-container">
+          <div class="item1" id="id-ord-inc-title">Ordinary Income Tax</div>
+          <div class="item2" id="id-ord-inc">-</div>
+          <div class="item3">Ordinary income</div>
+          <div class="item4" id="id-std-ded">-</div>
+          <div class="item5">Standard deduction</div>
+          <div class="item6" id="id-tax-inc">-</div>
+          <div class="item7">Taxable income</div>
+          <div class="item8" id="id-ord-inc-rate">%</div>
+          <div class="item9">Tax rate</div>
+          <div class="item10" id="id-ord-inc-min">-</div>
+          <div class="item11">Tax minimum</div>
+          <div class="item12" id="id-ord-inc-brkt">-</div>
+          <div class="item13">Tax within bracket</div>
+          <div class="item14" id="id-ord-inc-tax">-</div>
+          <div class="item15">Ordinary income tax</div>
+        </div>
+        <div class="grid-container">
+          <div class="item1" id="id-ltcg-title">
+            Long-Term Capital Gains Tax
+          </div>
+          <div class="item2" id="id-ltcg">-</div>
+          <div class="item3">LTCG</div>
+          <div class="item4" id="id-ltcg-rate">%</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-ltcg-tax">-</div>
+          <div class="item7">LTCG tax</div>
+        </div>
+        <div class="grid-container">
+          <div class="item1" id="id-niit-title">Net Investment Income Tax</div>
+          <div class="item2" id="id-nii">-</div>
+          <div class="item3">MAGI over threshold</div>
+          <div class="item4" id="id-niit-rate">%</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-niit-tax">-</div>
+          <div class="item7">NIIT tax</div>
+        </div>
+        <div class="grid-container">
+          <div class="item1" id="id-total-title">Total Tax</div>
+          <div class="item2" id="id-total-tax">-</div>
+          <div class="item3">Total income tax</div>
+        </div>
       </div>
-      <div class="grid-container">
-        <div class="item1" id="id-ord-inc-title">Ordinary Income Tax</div>
-        <div class="item2" id="id-ord-inc">-</div>
-        <div class="item3">Ordinary income</div>
-        <div class="item4" id="id-std-ded">-</div>
-        <div class="item5">Standard deduction</div>
-        <div class="item6" id="id-tax-inc">-</div>
-        <div class="item7">Taxable income</div>
-        <div class="item8" id="id-ord-inc-rate">%</div>
-        <div class="item9">Tax rate</div>
-        <div class="item10" id="id-ord-inc-min">-</div>
-        <div class="item11">Tax minimum</div>
-        <div class="item12" id="id-ord-inc-brkt">-</div>
-        <div class="item13">Tax within bracket</div>
-        <div class="item14" id="id-ord-inc-tax">-</div>
-        <div class="item15">Ordinary income tax</div>
+      <div class="grid-summary-wrapper">
+        <div class="summary" id="id-summary">$0</div>
+        <button class="button" onclick="calcFn()">Calculate Tax</button>
       </div>
-      <div class="grid-container">
-        <div class="item1" id="id-ltcg-title">Long-Term Capital Gains Tax</div>
-        <div class="item2" id="id-ltcg">-</div>
-        <div class="item3">LTCG</div>
-        <div class="item4" id="id-ltcg-rate">%</div>
-        <div class="item5">Tax rate</div>
-        <div class="item6" id="id-ltcg-tax">-</div>
-        <div class="item7">LTCG tax</div>
-      </div>
-      <div class="grid-container">
-        <div class="item1" id="id-niit-title">Net Investment Income Tax</div>
-        <div class="item2" id="id-nii">-</div>
-        <div class="item3">MAGI over threshold</div>
-        <div class="item4" id="id-niit-rate">%</div>
-        <div class="item5">Tax rate</div>
-        <div class="item6" id="id-niit-tax">-</div>
-        <div class="item7">NIIT tax</div>
-      </div>
-      <div class="grid-container">
-        <div class="item1" id="id-total-title">Total Tax</div>
-        <div class="item2" id="id-total-tax">-</div>
-        <div class="item3">Total income tax</div>
-      </div>
-    </div>
-    <div class="grid-summary-wrapper">
-      <div class="summary" id="id-summary">$0</div>
-      <button class="button" onclick="calcFn()">Calculate Tax</button>
     </div>
   </div>
-</div>
-  
 </body>

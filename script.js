@@ -1,3 +1,56 @@
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.addEventListener("click", getData);
+});
+
+function getData(ev) {
+  //get some data from the random-data-api
+  const type = "users"; // users info
+  const url = new URL(`https://random-data-api.com/api/v2/${type}`);
+  let params = new URLSearchParams();
+  //size - number of records to return (default is 1)
+  //response_type - json or xml (default is json)
+  params.set("size", 2);
+  params.set("response_type", "json");
+  url.search = params;
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) throw new Error("Bad things happened");
+      return response.json();
+    })
+    .then(buildUserHTML)
+    .catch(console.warn);
+}
+
+function buildUserHTML(data) {
+  let main = document.querySelector("main");
+  main.innerHTML = data
+    .map(
+      ({
+        first_name,
+        last_name,
+        employment,
+        email,
+        id,
+        avatar,
+        date_of_birth,
+      }) => {
+        return `<div class="card" data-ref="${id}">
+        <img src="${avatar}" alt="robohash api" />
+        <h3>${first_name} ${last_name}</h3>
+        <p>${employment.title}</p>
+        <p>${email}</p>
+        <p>${date_of_birth}</p>
+      </div>`;
+      }
+    )
+    .join("");
+  document.getElementById("id-tp-info").innerHTML =
+    data[0].first_name + " " + data[0].last_name;
+  document.getElementById("id-occ").innerHTML = data[0].employment.title;
+  console.log(data);
+}
+
 function calcFn() {
   function getBracket(num) {
     return num >= 609351 && num < 1000000000
