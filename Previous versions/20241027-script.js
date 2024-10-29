@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getData(ev) {
-  const type = "users";
+  //get some data from the random-data-api
+  const type = "users"; // users info
   const url = new URL(`https://random-data-api.com/api/v2/${type}`);
   let params = new URLSearchParams();
+  //size - number of records to return (default is 1)
+  //response_type - json or xml (default is json)
   params.set("size", 2);
   params.set("response_type", "json");
   url.search = params;
@@ -186,10 +189,10 @@ function calcFn() {
     }).format(num);
   }
 
-  ordInc = Math.round(Math.random() * 900000 + 1000);
-  // USE LINE FOR TESTING ordInc = 714600;
-  ltcg = Math.round(Math.random() * 260000 + 20000);
-  // USE LINE FOR TESTING ltcg = 300000;
+  // RESTORE AFTER TESTING  ordInc = Math.round(Math.random() * 900000 + 1000);
+  ordInc = 714600;
+  // RESTORE AFTER TESTING  ltcg = Math.round(Math.random() * 260000 + 20000);
+  ltcg = 300000;
   addtlInc = 0;
   totalInc = ordInc + ltcg + addtlInc;
   adjToInc = 0;
@@ -217,8 +220,8 @@ function calcFn() {
   getNiitThreshold(magi);
   magiOverThreshold = magi - niiThreshold;
   nii = Math.min(magiOverThreshold, prelimNii);
-  niit = Math.round(nii * niitRate);
-  // USE LINE FOR TESTING niit = 0;
+  // RESTORE AFTER TESTING niit = Math.round(nii * niitRate);
+  niit = 0;
 
   taxableIncNoLtcg = taxableIncLtcg - ltcg;
   console.log(
