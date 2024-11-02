@@ -1,56 +1,32 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.addEventListener("click", getData);
-});
-
-function getData(ev) {
-  const type = "users";
-  const url = new URL(`https://random-data-api.com/api/v2/${type}`);
-  let params = new URLSearchParams();
-  params.set("size", 1);
-  params.set("response_type", "json");
-  url.search = params;
-
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) throw new Error("Bad things happened");
-      return response.json();
-    })
-    .then(buildUserHTML)
-    .catch(console.warn);
+async function syncDataJsonPlaceholder() {
+  const url = "https://jsonplaceholder.typicode.com/users";
+  const response = await fetch(url);
+  const data = await response.json();
+  const randomIndex = Math.floor(Math.random() * data.length);
+  document.getElementById("id-company").innerHTML = data[randomIndex].company.name;
+  document.getElementById("m-id-asyncUser1").innerHTML = data[randomIndex].company.name;
+  document.getElementById("m-id-asyncUser2").innerHTML = data[randomIndex].address.city;
+  document.getElementById("m-id-asyncUser3").innerHTML = data[randomIndex].website;
 }
 
-function buildUserHTML(data) {
-  data = Array.isArray(data) ? data : [data];
-  let main = document.getElementById("m-id-event");
-  main.innerHTML = data
-    .map(
-      ({
-        first_name,
-        last_name,
-        employment,
-        email,
-        id,
-        avatar,
-        date_of_birth,
-      }) => {
-        return `<div class="card" data-ref="${id}">
-        <img src="${avatar}" alt="robohash api" />
-        <h3>${first_name} ${last_name}</h3>
-        <p>${employment.title}</p>
-        <p>${email}</p>
-        <p>${date_of_birth}</p>
-      </div>`;
-      }
-    )
-    .join("");
-  document.getElementById("id-tp-info").innerHTML =
-    data[0].first_name + " " + data[0].last_name;
-  document.getElementById("id-occ").innerHTML = data[0].employment.title;
+async function syncDataBank() {
+  const url = "https://random-data-api.com/api/v2/banks";
+  const response = await fetch(url);
+  const data = await response.json();
   console.log(data);
+  document.getElementById("m-id-asyncBank").innerHTML = data.bank_name;
 }
 
-async function syncData() {
+async function syncDataCountries() {
+  const url = "https://restcountries.com/v3.1/all ";
+  const response = await fetch(url);
+  const data = await response.json();
+  const randomIndex = Math.floor(Math.random() * data.length);
+  console.log(data[randomIndex].capital[0]);
+  document.getElementById("id-tp-city").innerHTML = data[randomIndex].capital[0];
+}
+
+async function syncDataTodo() {
   const url = "https://jsonplaceholder.typicode.com/todos/";
   try {
     const response = await fetch(url);
@@ -60,101 +36,36 @@ async function syncData() {
     const json = await response.json();
     const randomIndex = Math.floor(Math.random() * json.length);
     console.log(json[randomIndex]);
-    document.getElementById("m-id-async").innerHTML = json[randomIndex].title;
+    document.getElementById("m-id-asyncTodo").innerHTML =
+      json[randomIndex].title;
   } catch (error) {
     console.error(error.message);
   }
 }
 
 function calcFn() {
-  
-  syncData();
+  syncDataJsonPlaceholder();
+  syncDataBank();
+  syncDataCountries();
+  syncDataTodo();
 
   function getBracket(num) {
     return num >= 609351 && num < 1000000000
-      ? ((ordIncRate = 0.37),
-        (ordIncLwrBrkts = 183647.25),
-        (ordIncCeiling = 1000000000),
-        (ordIncFloor = 609350))
+      ? ((rate = 0.37), (lowerBrackets = 183647.25), (floor = 609350))
       : num >= 243726 && num <= 609350
-      ? ((ordIncRate = 0.35),
-        (ordIncLwrBrkts = 55678.5),
-        (ordIncCeiling = 609350),
-        (ordIncFloor = 243725))
+      ? ((rate = 0.35), (lowerBrackets = 55678.5), (floor = 243725))
       : num >= 191951 && num <= 243725
-      ? ((ordIncRate = 0.32),
-        (ordIncLwrBrkts = 39110.5),
-        (ordIncCeiling = 243725),
-        (ordIncFloor = 191950))
+      ? ((rate = 0.32), (lowerBrackets = 39110.5), (floor = 191950))
       : num >= 100526 && num <= 191950
-      ? ((ordIncRate = 0.24),
-        (ordIncLwrBrkts = 17168.5),
-        (ordIncCeiling = 191150),
-        (ordIncFloor = 100525))
+      ? ((rate = 0.24), (lowerBrackets = 17168.5), (floor = 100525))
       : num >= 47151 && num <= 100525
-      ? ((ordIncRate = 0.22),
-        (ordIncLwrBrkts = 5426),
-        (ordIncCeiling = 100525),
-        (ordIncFloor = 47150))
+      ? ((rate = 0.22), (lowerBrackets = 5426), (floor = 47150))
       : num >= 11601 && num <= 47150
-      ? ((ordIncRate = 0.12),
-        (ordIncLwrBrkts = 1160),
-        (ordIncCeiling = 47150),
-        (ordIncFloor = 11600))
+      ? ((rate = 0.12), (lowerBrackets = 1160), (floor = 11600))
       : num > 0 && num <= 11600
-      ? ((ordIncRate = 0.1),
-        (ordIncLwrBrkts = 0),
-        (ordIncCeiling = 11600),
-        (ordIncFloor = 0))
+      ? ((rate = 0.1), (lowerBrackets = 0), (floor = 0))
       : num <= 0
-      ? ((ordIncRate = 0),
-        (ordIncLwrBrkts = 0),
-        (ordIncCeiling = 0),
-        (ordIncFloor = 0))
-      : console.log("Error.");
-  }
-
-  function getNoLtcgBracket(num) {
-    return num >= 609351 && num < 1000000000
-      ? ((taxableIncNoLtcgRate = 0.37),
-        (taxableIncNoLtcgLwrBrkts = 183647.25),
-        (taxableIncNoLtcgCeiling = 1000000000),
-        (taxableIncNoLtcgFloor = 609350))
-      : num >= 243726 && num <= 609350
-      ? ((taxableIncNoLtcgRate = 0.35),
-        (taxableIncNoLtcgLwrBrkts = 55678.5),
-        (taxableIncNoLtcgCeiling = 609350),
-        (taxableIncNoLtcgFloor = 243725))
-      : num >= 191951 && num <= 243725
-      ? ((taxableIncNoLtcgRate = 0.32),
-        (taxableIncNoLtcgLwrBrkts = 39110.5),
-        (taxableIncNoLtcgCeiling = 243725),
-        (taxableIncNoLtcgFloor = 191950))
-      : num >= 100526 && num <= 191950
-      ? ((taxableIncNoLtcgRate = 0.24),
-        (taxableIncNoLtcgLwrBrkts = 17168.5),
-        (taxableIncNoLtcgCeiling = 191150),
-        (taxableIncNoLtcgFloor = 100525))
-      : num >= 47151 && num <= 100525
-      ? ((taxableIncNoLtcgRate = 0.22),
-        (taxableIncNoLtcgLwrBrkts = 5426),
-        (taxableIncNoLtcgCeiling = 100525),
-        (taxableIncNoLtcgFloor = 47150))
-      : num >= 11601 && num <= 47150
-      ? ((taxableIncNoLtcgRate = 0.12),
-        (taxableIncNoLtcgLwrBrkts = 1160),
-        (taxableIncNoLtcgCeiling = 47150),
-        (taxableIncNoLtcgFloor = 11600))
-      : num > 0 && num <= 11600
-      ? ((taxableIncNoLtcgRate = 0.1),
-        (taxableIncNoLtcgLwrBrkts = 0),
-        (taxableIncNoLtcgCeiling = 11600),
-        (taxableIncNoLtcgFloor = 0))
-      : num <= 0
-      ? ((taxableIncNoLtcgRate = 0),
-        (taxableIncNoLtcgLwrBrkts = 0),
-        (taxableIncNoLtcgCeiling = 0),
-        (taxableIncNoLtcgFloor = 0))
+      ? ((rate = 0), (lowerBrackets = 0), (floor = 0))
       : console.log("Error.");
   }
 
@@ -221,16 +132,34 @@ function calcFn() {
   console.log("Test: " + prelimTaxableInc + " Prelim. taxable income");
 
   noNegativeNumber(prelimTaxableInc);
-  console.log(
-    "Test: " + taxableIncLtcg + " A. Taxable income incl. capital gains"
-  );
+  console.log("Test: " + taxableIncLtcg + " TI CG");
+
   getBracket(taxableIncLtcg);
+  ordIncRate = rate;
+  ordIncLwrBrkts = lowerBrackets;
+  ordIncFloor = floor;
+
   taxableIncLtcgBrkt = Math.round((taxableIncLtcg - ordIncFloor) * ordIncRate);
   console.log("Test: " + ordIncRate + " Ordinary income rate");
   taxableIncLtcgTax = Math.round(ordIncLwrBrkts + taxableIncLtcgBrkt);
 
   getLtcgBracket(taxableIncLtcg);
   ltcgTax = Math.round(ltcg * ltcgRate);
+
+  taxableIncNoLtcg = taxableIncLtcg - ltcg;
+  console.log("Test: " + taxableIncNoLtcg + " TI no CG");
+
+  getBracket(taxableIncNoLtcg);
+  taxableIncNoLtcgRate = rate;
+  taxableIncNoLtcgLwrBrkts = lowerBrackets;
+  taxableIncNoLtcgFloor = floor;
+
+  taxableIncNoLtcgBrkt = Math.round((taxableIncNoLtcg - taxableIncNoLtcgFloor) * taxableIncNoLtcgRate);
+  taxableIncNoLtcgTax = Math.round(taxableIncNoLtcgLwrBrkts + taxableIncNoLtcgBrkt);
+  taxableIncLtcgTaxedSeparately = taxableIncNoLtcgTax + ltcgTax;
+  taxableIncLtcgTaxedTogether = taxableIncLtcgTax;
+
+  lowerOfTwoTaxes = Math.min(taxableIncLtcgTaxedTogether, taxableIncLtcgTaxedSeparately);
 
   prelimNii = 300000;
   magi = agi + adjToInc;
@@ -241,41 +170,35 @@ function calcFn() {
   niit = Math.round(nii * niitRate);
   // USE LINE FOR TESTING niit = 0;
 
-  taxableIncNoLtcg = taxableIncLtcg - ltcg;
-  console.log(
-    "Test: " + taxableIncNoLtcg + " B. Taxable income excl. capital gains"
-  );
-  getNoLtcgBracket(taxableIncNoLtcg);
-  taxableIncNoLtcgBrkt = Math.round(
-    (taxableIncNoLtcg - taxableIncNoLtcgFloor) * taxableIncNoLtcgRate
-  );
-  taxableIncNoLtcgTax = Math.round(
-    taxableIncNoLtcgLwrBrkts + taxableIncNoLtcgBrkt
-  );
-  taxableIncLtcgTaxedSeparately = taxableIncNoLtcgTax + ltcgTax;
-
-  lowerOfTwoTaxes = Math.min(taxableIncLtcgTax, taxableIncLtcgTaxedSeparately);
   totalTax = lowerOfTwoTaxes + niit;
 
   console.log(`Tax Breakdown:
-    \n\n${taxableIncLtcgTax} Tax from A.
-    \n${taxableIncLtcgTaxedSeparately} Tax from B.
-    \n${lowerOfTwoTaxes} Lower of the 2 values
-    \n\n+ ${taxableIncNoLtcgTax} ordinary income tax
-    \n+ ${ltcgTax} capital gains tax
+    \n+ ${ordInc} ordinary income
+    \n+ ${ltcg} capital gains
+    \n- ${stdDed} standard deduction
+    \n= ${taxableIncLtcg} taxable income
+    \n- ${ordIncFloor} floor
+    \n= ${taxableIncLtcg - ordIncFloor} (TI - floor)
+    \n* ${ordIncRate} OI rate
+    \n= ${Math.round(
+      (taxableIncLtcg - ordIncFloor) * ordIncRate
+    )} tax within bracket
+    \n+ ${Math.round(ordIncLwrBrkts)} OI lower brackets
+    \n= ${taxableIncLtcgTax} Tax A [OI CG taxed together]
+    \n\n+ ${taxableIncNoLtcgTax} OI tax
+    \n+ ${ltcgTax} CG tax
+    \n= ${taxableIncLtcgTaxedSeparately} Tax B [OI CG taxed separately]
+    \n\n${lowerOfTwoTaxes} lower of A and B
+    \n\n+ ${taxableIncNoLtcgTax} OI tax from A
+    \n+ ${ltcgTax} CG tax from A
     \n+ ${niit} NIIT
     \n= ${totalTax} Total tax
   `);
 
   document.getElementById("id-ord-inc").innerHTML = usdFormat(ordInc);
   document.getElementById("id-std-ded").innerHTML = usdFormat(stdDed);
-  document.getElementById("id-tax-inc").innerHTML = usdFormat(taxableIncLtcg);
   document.getElementById("id-ord-inc-rate").innerHTML =
     percentFormat(ordIncRate);
-  document.getElementById("id-ord-inc-min").innerHTML =
-    usdFormat(ordIncLwrBrkts);
-  document.getElementById("id-ord-inc-brkt").innerHTML =
-    usdFormat(taxableIncNoLtcgBrkt);
   document.getElementById("id-ord-inc-tax").innerHTML =
     usdFormat(taxableIncNoLtcgTax);
 
@@ -289,5 +212,5 @@ function calcFn() {
   document.getElementById("id-niit-tax").innerHTML = usdFormat(niit);
 
   document.getElementById("id-total-tax").innerHTML = usdFormat(totalTax);
-  document.getElementById("id-summary").innerHTML = usdFormat(totalTax);
+  document.getElementById("id-summary-amount").innerHTML = usdFormat(totalTax);
 }

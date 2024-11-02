@@ -4,14 +4,37 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <main id="m-id-async">[Fetch API placeholder]</main>
-  <main id="m-id-event">[EventListener placeholder]</main>
-  <main id="m-id-async2">[Fetch API placeholder]</main>
   <div class="container">
     <div class="grid-breakdown-and-summary-wrapper">
-      <div class="grid-container-wrapper">
-        <div class="grid-container">
+      <div class="grid-container-wrapper-tp-info" id="container-id-tp-info">
+        <div class="grid-container-tp-info" id="id-container-tp-info">
           <div class="item1" id="id-tp-info">Taxpayer Info</div>
+          <div class="item2">Company</div>
+          <div class="item3" id="id-company">-</div>
+          <div class="item4">Tax year</div>
+          <div class="item5">2024</div>
+          <div class="item6">Filing status</div>
+          <div class="item7">Single</div>
+          <div class="item8">Itemized</div>
+          <div class="item9">No</div>
+          <div class="item10">Standard deduction</div>
+          <div class="item11" id="id-std-ded">-</div>
+        </div>
+        <div class="grid-container-tp-info" id="id-container-personal">
+          <div class="item1" id="id-tp-info">Personal Info</div>
+          <div class="item2">City</div>
+          <div class="item3" id="id-tp-city">-</div>
+          <div class="item4">Dependents</div>
+          <div class="item5">None</div>
+          <div class="item6">Filing status</div>
+          <div class="item7">Single</div>
+          <div class="item8">Itemized</div>
+          <div class="item9">No</div>
+          <div class="item10">Standard deduction</div>
+          <div class="item11" id="id-std-ded">-</div>
+        </div>
+        <div class="grid-container-tp-info" id="PLACEHOLDER2">
+          <div class="item1" id="id-tp-info">Dependents Info</div>
           <div class="item2">Occupation</div>
           <div class="item3" id="id-occ">-</div>
           <div class="item4">Tax year</div>
@@ -20,25 +43,25 @@
           <div class="item7">Single</div>
           <div class="item8">Itemized</div>
           <div class="item9">No</div>
+          <div class="item10">Standard deduction</div>
+          <div class="item11" id="id-std-ded">-</div>
         </div>
-        <div class="grid-container">
+      </div>
+      <div class="grid-container-wrapper-summary" id="container-id-summary">
+        <div class="grid-container-summary" id="id-container-summary">
+          <div class="summary-amount" id="id-summary-amount">$0</div>
+          <button class="button" onclick="calcFn()">Calculate Tax</button>
+        </div>
+        <div class="grid-container-breakdown" id="id-container-ord-inc">
           <div class="item1" id="id-ord-inc-title">Ordinary Income Tax</div>
           <div class="item2" id="id-ord-inc">-</div>
           <div class="item3">Ordinary income</div>
-          <div class="item4" id="id-std-ded">-</div>
-          <div class="item5">Standard deduction</div>
-          <div class="item6" id="id-tax-inc">-</div>
-          <div class="item7">Taxable income</div>
-          <div class="item8" id="id-ord-inc-rate">%</div>
-          <div class="item9">Tax rate</div>
-          <div class="item10" id="id-ord-inc-min">-</div>
-          <div class="item11">Tax minimum</div>
-          <div class="item12" id="id-ord-inc-brkt">-</div>
-          <div class="item13">Tax within bracket</div>
-          <div class="item14" id="id-ord-inc-tax">-</div>
-          <div class="item15">Ordinary income tax</div>
+          <div class="item4" id="id-ord-inc-rate">-</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-ord-inc-tax">-</div>
+          <div class="item7">Ordinary income tax</div>
         </div>
-        <div class="grid-container">
+        <div class="grid-container-breakdown" id="id-container-ltcg">
           <div class="item1" id="id-ltcg-title">
             Long-Term Capital Gains Tax
           </div>
@@ -49,7 +72,7 @@
           <div class="item6" id="id-ltcg-tax">-</div>
           <div class="item7">LTCG tax</div>
         </div>
-        <div class="grid-container">
+        <div class="grid-container-breakdown" id="id-container-niit">
           <div class="item1" id="id-niit-title">Net Investment Income Tax</div>
           <div class="item2" id="id-nii">-</div>
           <div class="item3">MAGI over threshold</div>
@@ -58,16 +81,17 @@
           <div class="item6" id="id-niit-tax">-</div>
           <div class="item7">NIIT tax</div>
         </div>
-        <div class="grid-container">
+        <div class="grid-container-breakdown" id="id-container-total">
           <div class="item1" id="id-total-title">Total Tax</div>
           <div class="item2" id="id-total-tax">-</div>
           <div class="item3">Total income tax</div>
         </div>
       </div>
-      <div class="grid-summary-wrapper">
-        <div class="summary" id="id-summary">$0</div>
-        <button class="button" onclick="calcFn()">Calculate Tax</button>
-      </div>
     </div>
   </div>
+  <main id="m-id-asyncUser1">[Fetch API placeholder]</main>
+  <main id="m-id-asyncUser2">[Fetch API placeholder]</main>
+  <main id="m-id-asyncUser3">[Fetch API placeholder]</main>
+  <main id="m-id-asyncBank">[Fetch API placeholder]</main>
+  <main id="m-id-asyncTodo">[Fetch API placeholder]</main>
 </body>
