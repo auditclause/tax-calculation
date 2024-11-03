@@ -132,7 +132,7 @@ function calcFn() {
   // USE LINE FOR TESTING ordInc = 714600;
   salesPrice = Math.round(Math.random() * 260000) + 68369;
   costBasis = 68369;
-  // fix costBasis line to be referenced from async function, if possible
+  // fix costBasis line
   ltcg = salesPrice - costBasis;
   // USE LINE FOR TESTING ltcg = 300000;
 
