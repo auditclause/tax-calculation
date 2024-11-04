@@ -3,7 +3,8 @@ async function syncCoinDesk() {
   const response = await fetch(url);
   const data = await response.json();
   console.log("CoinDesk Fetch " + data.bpi.USD.rate);
-  costBasis = data.bpi.USD.rate;
+  costBasis = Math.round(parseFloat(data.bpi.USD.rate.replace(/,/g,'')));
+  document.getElementById("id-cost-basis").innerHTML = costBasis;
 }
 
 async function syncDataJsonPlaceholder() {
@@ -51,12 +52,16 @@ async function syncDataTodo() {
   }
 }
 
-function calcFn() {
-  syncCoinDesk();
-  syncDataJsonPlaceholder();
-  syncDataBank();
-  syncDataCountries();
-  syncDataTodo();
+async function calcFn() {
+
+  try {
+    await Promise.all([
+      syncCoinDesk(),
+      syncDataJsonPlaceholder(),
+      syncDataBank(),
+      syncDataCountries(),
+      syncDataTodo()
+    ]);
 
   function getBracket(num) {
     return num >= 609351 && num < 1000000000
@@ -127,32 +132,36 @@ function calcFn() {
     }).format(num);
   }
 
-  
   ordInc = Math.round(Math.random() * 900000 + 1000);
   // USE LINE FOR TESTING ordInc = 714600;
   salesPrice = Math.round(Math.random() * 260000) + 68369;
-  costBasis = 68369;
-  // fix costBasis line
+  // costBasis is defined in the syncCoinDesk() function.
   ltcg = salesPrice - costBasis;
   // USE LINE FOR TESTING ltcg = 300000;
 
-  console.log("Test: " + salesPrice + " sales price");
-  console.log("Test: " + costBasis + " cost basis");
-  console.log("Test: " + ltcg + " ltcg");
+  console.log(`Test:
+    \n ${salesPrice} sales price
+    \n ${costBasis} cost basis
+    \n ${ltcg} ltcg
+  `);
 
   addtlInc = 0;
   totalInc = ordInc + ltcg + addtlInc;
   adjToInc = 0;
   agi = ordInc + ltcg + addtlInc - adjToInc;
-  console.log("Test: " + agi + " AGI");
   itemDed = 0;
   stdDed = 14600;
   prelimTaxableInc = agi - stdDed;
-  console.log("Test: " + prelimTaxableInc + " Prelim. taxable income");
-
+  
   noNegativeNumber(prelimTaxableInc);
-  console.log("Test: " + taxableIncLtcg + " TI CG");
 
+  console.log(`Test:
+    \n ${agi} AGI
+    \n ${prelimTaxableInc} Prelim. taxable income
+    \n ${taxableIncLtcg} TI CG    
+  `);
+
+  // taxableIncLtcg is defined in the noNegativeNumber(prelimTaxableInc) function.
   getBracket(taxableIncLtcg);
   ordIncRate = rate;
   ordIncLwrBrkts = lowerBrackets;
@@ -199,9 +208,7 @@ function calcFn() {
     \n- ${ordIncFloor} floor
     \n= ${taxableIncLtcg - ordIncFloor} (TI - floor)
     \n* ${ordIncRate} OI rate
-    \n= ${Math.round(
-      (taxableIncLtcg - ordIncFloor) * ordIncRate
-    )} tax within bracket
+    \n= ${Math.round((taxableIncLtcg - ordIncFloor) * ordIncRate)} tax within bracket
     \n+ ${Math.round(ordIncLwrBrkts)} OI lower brackets
     \n= ${taxableIncLtcgTax} Tax A [OI CG taxed together]
     \n\n+ ${taxableIncNoLtcgTax} OI tax
@@ -232,4 +239,8 @@ function calcFn() {
 
   document.getElementById("id-total-tax").innerHTML = usdFormat(totalTax);
   document.getElementById("id-summary-amount").innerHTML = usdFormat(totalTax);
+  
+} catch (error) {
+  console.error("Error: promises did not complete before calculation function", error);
+};
 }
