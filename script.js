@@ -34,16 +34,6 @@ async function syncDataJsonPlaceholder() {
   document.getElementById("id-company").innerHTML = companyName;
 }
 
-// City
-async function syncDataCountries() {
-  const url = "https://restcountries.com/v3.1/all ";
-  const response = await fetch(url);
-  const data = await response.json();
-  const randomIndex = Math.floor(Math.random() * data.length);
-  console.log(data[randomIndex].capital[0]);
-  document.getElementById("id-tp-city").innerHTML = data[randomIndex].capital[0];
-}
-
 async function calcFn() {
 
   try {
@@ -228,6 +218,7 @@ async function calcFn() {
   document.getElementById("id-ord-inc-rate").innerHTML = percentFormat(ordIncRate);
   document.getElementById("id-ord-inc-tax").innerHTML = usdFormat(taxableIncNoLtcgTax);
 
+  document.getElementById("id-holding-period").innerHTML = "> 1 year"
   document.getElementById("id-ltcg").innerHTML = usdFormat(ltcg);
   document.getElementById("id-ltcg-rate").innerHTML = percentFormat(ltcgRate);
   document.getElementById("id-ltcg-tax").innerHTML = usdFormat(ltcgTax);
