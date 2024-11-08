@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">1MX2</div>
+    <div class="header-right">1 MILLION X 2</div>
+  </div>
+  <div class="container">
+    <div class="grid-all-wrappers">
+      <div class="grid-container-wrapper-comparisons" id="container-id-comparisons">
+        <div class="grid-container-1M" id="id-container-1M">
+          <div class="item1" id="id-item1">1MX2</div>
+          <div class="item2" id="id-item2">$1 Million In</div>
+          <div class="item3" id="id-item3">W2 Wages</div>
+          <div class="item4" id="id-item4">Cap Gains</div>
+          <div class="item5" id="id-item5">-</div>
+          <div class="item6" id="id-item6">-</div>
+          <div class="item7" id="id-item7">-</div>
+          <div class="item8" id="id-item8">-</div>
+          <div class="item9" id="id-item9">-</div>
+          <div class="item10" id="id-item10">-</div>
+          <div class="item11" id="id-item11">-</div>
+          <div class="item12" id="id-item12">-</div>
+          <div class="item13" id="id-item13">-</div>
+          <div class="item14" id="id-item14">-</div>
+          <div class="item15" id="id-item15">-</div>
+          <div class="item16" id="id-item16">-</div>
+          <div class="item17" id="id-item17">-</div>
+          <div class="item18" id="id-item18">-</div>
+          <div class="item19" id="id-item19">-</div>
+          <div class="item20" id="id-item20">-</div>
+          <div class="item21" id="id-item21">-</div>
+          <div class="item22" id="id-item22">-</div>
+          <div class="item23" id="id-item23">-</div>
+          <div class="item24" id="id-item24">-</div>
+          <div class="item25" id="id-item25">-</div>
+        </div>
+      </div>
+      <div class="grid-container-wrapper-tp-info" id="container-id-tp-info">
+        <div class="grid-container-tp-info" id="id-container-tp-info">
+          <div class="item1" id="id-tp-info">Taxpayer Info</div>
+          <div class="item2">Name</div>
+          <div class="item3" id="id-name">-</div>
+          <div class="item4">Occupation</div>
+          <div class="item5" id="id-occ">-</div>
+          <div class="item6">Tax year</div>
+          <div class="item7">2024</div>
+          <div class="item8">Filing status</div>
+          <div class="item9">Single</div>
+          <div class="item10">Itemized deduction</div>
+          <div class="item11" id="id-itemized">-</div>
+          <div class="item12">Standard deduction</div>
+          <div class="item13" id="id-std-ded">-</div>
+          <div class="item14">Exemptions</div>
+          <div class="item15">None</div>
+        </div>
+        <div class="grid-container-tp-info" id="id-container-asset-sale">
+          <div class="item1" id="id-tp-info">Asset Sold</div>
+          <div class="item2">Company</div>
+          <div class="item3" id="id-company">-</div>
+          <div class="item4">Holding Period</div>
+          <div class="item5" id="id-holding-period">-</div>
+          <div class="item6">Sales Price</div>
+          <div class="item7" id="id-sales-price">-</div>
+          <div class="item8">Cost Basis</div>
+          <div class="item9" id="id-cost-basis">-</div>
+        </div>
+        <div class="grid-container-tp-info" id="PLACEHOLDER2">
+          <div class="item1">Dependents Info</div>
+          <div class="item2">Dependents</div>
+          <div class="item3">None</div>
+          <div class="item4">Dependent 1 Age</div>
+          <div class="item5">-</div>
+          <div class="item6">Dependent 2 Age</div>
+          <div class="item7">-</div>
+          <div class="item8">[PLACEHOLDER]</div>
+          <div class="item9">-</div>
+          <div class="item10">[PLACEHOLDER]</div>
+          <div class="item11">-</div>
+        </div>
+      </div>
+      <div class="grid-container-wrapper-summary" id="container-id-summary">
+        <div class="grid-container-summary" id="id-container-summary">
+          <div class="summary-amount" id="id-summary-amount">$0</div>
+          <button class="button" onclick="calcFn()">Calculate Tax</button>
+        </div>
+        <div class="grid-container-breakdown" id="id-container-ord-inc">
+          <div class="item1" id="id-ord-inc-title">Ordinary Income Tax</div>
+          <div class="item2" id="id-ord-inc">-</div>
+          <div class="item3">Ordinary income</div>
+          <div class="item4" id="id-ord-inc-rate">-</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-ord-inc-tax">-</div>
+          <div class="item7">Ordinary income tax</div>
+        </div>
+        <div class="grid-container-breakdown" id="id-container-ltcg">
+          <div class="item1" id="id-ltcg-title">
+            Long-Term Capital Gains Tax
+          </div>
+          <div class="item2" id="id-ltcg">-</div>
+          <div class="item3">LTCG</div>
+          <div class="item4" id="id-ltcg-rate">%</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-ltcg-tax">-</div>
+          <div class="item7">LTCG tax</div>
+        </div>
+        <div class="grid-container-breakdown" id="id-container-niit">
+          <div class="item1" id="id-niit-title">Net Investment Income Tax</div>
+          <div class="item2" id="id-nii">-</div>
+          <div class="item3">MAGI over threshold</div>
+          <div class="item4" id="id-niit-rate">%</div>
+          <div class="item5">Tax rate</div>
+          <div class="item6" id="id-niit-tax">-</div>
+          <div class="item7">NIIT tax</div>
+        </div>
+        <div class="grid-container-breakdown" id="id-container-total">
+          <div class="item1" id="id-total-title">Total Tax</div>
+          <div class="item2" id="id-total-tax">-</div>
+          <div class="item3">Total income tax</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
